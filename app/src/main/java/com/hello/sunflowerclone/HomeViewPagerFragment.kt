@@ -4,24 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
+import com.hello.sunflowerclone.adapter.SunflowerPagerAdapter
 
 class HomeViewPagerFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    private lateinit var viewPager : ViewPager
+    private lateinit var pagerAdapter: SunflowerPagerAdapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_view_pager, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.btn_view_pager)?.setOnClickListener {
-            findNavController().navigate(R.id.action_view_pager_fragment_to_plant_detail_fragment)
-        }
+        viewPager = view.findViewById(R.id.view_pager)
+        initPager()
+        viewPager.adapter = pagerAdapter
+    }
+
+    private fun initPager() {
+        pagerAdapter = SunflowerPagerAdapter(requireFragmentManager())
+        pagerAdapter.addFragment(GardenFragment())
+        pagerAdapter.addFragment(PlantListFragment())
     }
 }
