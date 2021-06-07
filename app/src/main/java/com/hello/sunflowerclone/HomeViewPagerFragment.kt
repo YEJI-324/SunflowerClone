@@ -14,20 +14,17 @@ class HomeViewPagerFragment : Fragment() {
     private lateinit var pagerAdapter: SunflowerPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_view_pager, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_view_pager, container, false)
 
         viewPager = view.findViewById(R.id.view_pager)
-        initPager()
-        viewPager.adapter = pagerAdapter
+
+        initAdapter()
+
+        return view
     }
 
-    private fun initPager() {
+    private fun initAdapter() {
         pagerAdapter = SunflowerPagerAdapter(this)
-        pagerAdapter.addFragment(GardenFragment())
-        pagerAdapter.addFragment(PlantListFragment())
+        viewPager.adapter = pagerAdapter
     }
 }
